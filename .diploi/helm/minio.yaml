@@ -22,6 +22,11 @@ spec:
               name: minio
             - containerPort: 9000
               name: console
+          args:
+            - "server"
+            - "/data"
+            - "--console-address"
+            - "{{ .Values.hosts.console }}"
           env:
             {{- range .Values.env }}
             - name: {{ .identifier }}
