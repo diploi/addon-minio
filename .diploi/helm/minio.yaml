@@ -18,9 +18,9 @@ spec:
           image: {{ .Values.images.minio }}
           imagePullPolicy: Always
           ports:
-            - containerPort: 9001
-              name: minio
             - containerPort: 9000
+              name: minio
+            - containerPort: 9001
               name: console
           args:
             - "server"

@@ -19,4 +19,4 @@ spec:
               service:
                 name: console
                 port:
-                  number: 9000
+                  number: 9001
