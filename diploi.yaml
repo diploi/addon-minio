@@ -24,7 +24,7 @@ parameterGroups:
         type: string
       - name: Root Password
         identifier: MINIO_ROOT_PASSWORD
-        defaultValue: '${generate-random-password:12}'
+        defaultValue: minioadmin
         type: secret
       - name: Root Access
         identifier: MINIO_API_ROOT_ACCESS
