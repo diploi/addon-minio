@@ -1,0 +1,45 @@
+diploiVersion: v1.0
+type: addon
+name: MinIO
+description: Official MinIO addon for Diploi.
+
+hosts:
+  - name: MinIO Console
+    identifier: console
+    urlFormat: '[label].[default-domain]'
+
+parameterGroups:
+  - name: Connection
+    identifier: connection
+    description: Root user & connection configuration
+    parameters:
+      - name: Host
+        identifier: MINIO_HOST
+        defaultValue: minio.${DIPLOI_NAMESPACE}
+        type: string
+        readOnly: true
+      - name: Root User
+        identifier: MINIO_ROOT_USER
+        defaultValue: minioadmin
+        type: string
+      - name: Root Password
+        identifier: MINIO_ROOT_PASSWORD
+        defaultValue: '${generate-random-password:12}'
+        type: secret
+      - name: Root Access
+        identifier: MINIO_API_ROOT_ACCESS
+        defaultValue: on
+        type: string
+
+logs:
+  - name: MinIO Log
+    type: log
+    labelSelector: app=minio
+
+images:
+  - identifier: minio
+    image: minio/minio:latest
+
+storage:
+  - identifier: minio
+    sizeMiB: 10240

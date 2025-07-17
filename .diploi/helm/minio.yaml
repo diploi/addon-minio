@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: minio
+spec:
+  selector:
+    matchLabels:
+      app: minio
+  serviceName: minio
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+        - name: minio
+          image: {{ .Values.images.minio }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9001
+              name: minio
+            - containerPort: 9000
+              name: console
+          env:
+            {{- range .Values.env }}
+            - name: {{ .identifier }}
+              value: {{ .value | quote }}
+            {{- end }}
+            - name: MINIO_BROWSER_REDIRECT_URL
+              value: {{ .Values.hosts.console }}
+          volumeMounts:
+            - name: minio-mount
+              mountPath: /data
+      volumes:
+        - name: minio-mount
+          hostPath:
+            path: {{ $.Values.storage.minio.hostPath }}
