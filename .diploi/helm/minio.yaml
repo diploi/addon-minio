@@ -26,7 +26,7 @@ spec:
             - "server"
             - "/data"
             - "--console-address"
-            - "{{ .Values.hosts.console }}"
+            - ":9001"
           env:
             {{- range .Values.env }}
             - name: {{ .identifier }}
