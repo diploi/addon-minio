@@ -17,6 +17,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: console
+                name: minio
                 port:
-                  number: 9001
+                  name: console
